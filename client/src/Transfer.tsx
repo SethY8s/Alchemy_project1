@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import server from "./server";
 
 function Transfer({ address, setBalance }) {
