@@ -1,5 +1,7 @@
 import React from "react";
 import server from "./server";
+import { secp256k1 } from "ethereum-cryptography/secp256k1.js";
+import { toHex } from "ethereum-cryptography/utils";
 
 interface WalletParams {
   address: string;
@@ -19,11 +21,15 @@ const Wallet: React.FC<WalletParams> = ({
   setPrivateKey,
 }) => {
   async function onChange(evt) {
-    const address = evt.target.value;
+    const privateKey = evt.target.value;
+    const address = toHex(secp256k1.getPublicKey(privateKey));
+
+    console.log(address);
+
     setAddress(address);
     if (address) {
       const {
-        data: { balance: Number },
+        data: { balance },
       } = await server.get(`balance/${address}`);
       setBalance(balance);
     } else {

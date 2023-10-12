@@ -27,6 +27,8 @@ app.post("/send", (req, res) => {
   setInitialBalance(sender);
   setInitialBalance(recipient);
 
+  
+
   if (balances[sender] < amount) {
     res.status(400).send({ message: "Not enough funds!" });
   } else {

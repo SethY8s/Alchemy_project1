@@ -1,7 +1,17 @@
 import React, { useState } from "react";
 import server from "./server";
 
-function Transfer({ address, setBalance }) {
+interface TranserParams {
+  address: string;
+  setBalance: (x: number) => void;
+  privateKey: string;
+}
+
+const Transfer: React.FC<TranserParams> = ({
+  address,
+  setBalance,
+  privateKey,
+}) => {
   const [sendAmount, setSendAmount] = useState("");
   const [recipient, setRecipient] = useState("");
 
@@ -49,6 +59,6 @@ function Transfer({ address, setBalance }) {
       <input type="submit" className="button" value="Transfer" />
     </form>
   );
-}
+};
 
 export default Transfer;
